@@ -29,7 +29,7 @@ RUN mkdir -p /ros_jenkins_ws/src
 WORKDIR /ros_jenkins_ws/src
 
 # build
-WORKDIR /catkin_ws
+WORKDIR /ros_jenkins_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
 
 # replace setup.bash in ros_entrypoint.sh
