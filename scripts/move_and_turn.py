@@ -54,7 +54,7 @@ turn_duration = (turn_angle / 180.0) * \
 cmd_vel = Twist()
 cmd_vel.linear.x = move_speed
 cmd_vel.angular.z = 0.0
-
+rospy.loginfo(" Creando servicio")
 # create a service server
 service_server = rospy.Service(
     '/start_move_and_turn', Trigger, start_move_and_turn_callback)
