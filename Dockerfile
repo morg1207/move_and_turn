@@ -25,15 +25,17 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # Set up the catkin workspace
 WORKDIR /
-RUN mkdir -p /ros_jenkins_ws/src
-WORKDIR /ros_jenkins_ws/src
+RUN mkdir -p /catkin_ws/src
+WORKDIR /catkin_ws/src
+
+COPY ./ /catkin_ws/src/move_and_turn
 
 # build
-WORKDIR /ros_jenkins_ws
+WORKDIR /catkin_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
 
 # replace setup.bash in ros_entrypoint.sh
-RUN sed -i 's|source "/opt/ros/\$ROS_DISTRO/setup.bash"|source "/ros_jenkins_ws/devel/setup.bash"|g' /ros_entrypoint.sh
+RUN sed -i 's|source "/opt/ros/\$ROS_DISTRO/setup.bash"|source "/catkin_ws/devel/setup.bash"|g' /ros_entrypoint.sh
 
 # Set up the Network Configuration
 # Example with the ROS_MASTER_URI value set as the one running on the Host System
